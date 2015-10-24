@@ -6,9 +6,6 @@ import dao.UserDAO
 import model.User
 import scala.concurrent.Future
 
-/**
- * Created by Bhavya on 23-10-2015.
- */
 @Singleton
 class UserServiceImpl @Inject()(userDAO: UserDAO) extends UserService {
   override def addUser(user: User): Future[String] = {
