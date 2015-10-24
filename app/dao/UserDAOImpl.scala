@@ -7,9 +7,7 @@ import play.api.db.slick.DatabaseConfigProvider
 import slick.driver.JdbcProfile
 import scala.concurrent.Future
 import play.api.libs.concurrent.Execution.Implicits._
-/**
- * Created by Bhavya on 17-10-2015.
- **/
+
 @Singleton
 class UserDAOImpl @Inject()
 (dbConfigProvider: DatabaseConfigProvider) extends UserDAO {
