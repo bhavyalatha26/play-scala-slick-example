@@ -9,18 +9,31 @@ import play.api.i18n.{MessagesApi, Messages, I18nSupport}
 import play.api.libs.concurrent.Execution.Implicits._
 
 /**
- * Created by Bhavya on 23-10-2015.
+ * The user controller.
+ *
+ * @param messagesApi The Play messages API.
+ * @param userService The user service implementation.
  */
-class UserController @Inject()
+ class UserController @Inject()
 (userService: UserService,
  val messagesApi: MessagesApi) extends Controller with I18nSupport {
 
+/**
+ * Home Page.
+ *
+ * @return The result to display.
+ */
   def home = Action.async { implicit  request =>
     userService.listAllUsers map { users =>
       Ok(views.html.user(UserForm.form,users))
     }
   }
 
+/**
+ * Add User.
+ *
+ * @return The result to display.
+ */
   def addUser() = Action.async { implicit request =>
     UserForm.form.bindFromRequest.fold(
       // if any error in submitted data
@@ -32,7 +45,12 @@ class UserController @Inject()
         )
       })
   }
-
+  
+/**
+ * Delete User.
+ *
+ * @return The result to display.
+ */
   def deleteUser(id : Long) = Action.async { implicit request =>
     userService.deleteUser(id) map { res =>
       Redirect(routes.UserController.home())
